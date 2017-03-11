@@ -9,7 +9,7 @@ let nextId = 1;
         <hr>
         <button (click)="runclick()">Click Me</button>
         <hr>
-        <input type="text" [(ngModel)]="note" (keyup.enter)="saySomething($event)" >
+        <input type="text" #name [(ngModel)]="note" (keyup.enter)="saySomething($event)" (blur)="outofFocus(name.value)">
         <p>{{note}}</p>
         `
 })
@@ -28,7 +28,10 @@ export class MyComponent{
     runclick(){
         console.log('I was clicked');
     }
-    saySomething(e){
-        console.log(e.target.value);
+    saySomething($event:any){
+        console.log($event.target.value);
+    }
+    outofFocus(name:string){
+        console.log('Hello , you are in ' + name);
     }
 }
