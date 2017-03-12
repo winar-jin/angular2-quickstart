@@ -5,7 +5,7 @@ import { Http } from '@angular/http';
 import { Post } from './post'; 
 @Component({
     selector: 'my-post',
-    providers: [MyPostService],
+    providers: [MyPostService,Http],
     template: `
         <h1>Post service</h1>
         <form (submit)="addPost()">
@@ -29,17 +29,17 @@ export class MyPostComponent{
     private posts: any;
     private title:string;
     private content:string;
-    private newPost:object;
+    private newPost:any;
     constructor(
         private _postservice : MyPostService,
         private _http : Http
     ){
         // this.posts = this._postservice.postInfo;
-        this._postservice.postInfo().subscribe(
-            res => {
-                this.posts = res;
-            }
-        );
+        // this._postservice.postInfo().subscribe(
+        //     res => {
+        //         this.posts = res;
+        //     }
+        // );
     }
     addPost(){
         this.newPost = {

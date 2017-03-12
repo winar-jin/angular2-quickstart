@@ -1,0 +1,32 @@
+<div class="DEMO-form-container">
+  <h1>This is A Awesome Form!</h1>
+  <p class="user-msg">UserInfo: {{userInfo}}</p>
+  <button (click)="showUser(username)">Show User</button>
+  <form class="DEMO-form" *ngIf="active" (submit)="submitForm()" #userform="ngForm">
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" required #username="ngModel" #spy [ngModel]="user.name" (ngModelChange)="user.username = $event" name="username" class="form-control" id="username" placeholder="Username">
+      <!--<p [hidden]="username.pristine || username.vaild">用户名不可以为空!</p>-->
+      <p [hidden]="username.pristine || username.valid" class="alert alert-danger">用户名不可以为空!</p>
+      {{spy.className}}
+      <!--<input type="text" [(ngModel)]="user.username" name="username" class="form-control" id="username" placeholder="Username">-->
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" required [(ngModel)]="user.email" name="useremail" class="form-control" id="email" placeholder="Email">
+    </div>
+    <div class="form-group">
+      <label for="motto">Password</label>
+      <input type="text" required [(ngModel)]="user.motto" name="usermotto" class="form-control" id="motto" placeholder="Motto">
+    </div>
+    <div class="form-group">
+      <label for="favorite">Favorite fruit</label>
+      <select id="favorite" required [(ngModel)]="user.favorite" name="userfavorite" class="form-control" >
+                <option *ngFor="let favorite of favoriteFruitList" [value]="favorite">{{favorite}}</option>
+            </select>
+    </div>
+    <button type="submit" [disabled]="!userform.form.valid" class="btn btn-default">Submit</button>
+    <br>
+    <button class="btn btn-primary" (click)="addUser()" type="button" class="btn btn-default">addUser</button>
+  </form>
+</div>
